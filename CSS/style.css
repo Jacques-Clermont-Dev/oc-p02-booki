@@ -1,23 +1,16 @@
-/********************************************************************************************** General ***************************************/
-/****************************************************************************************** Initialisation ***********************************/
-* {
-  font-family: 'Raleway', Arial, Helvetica, sans-serif;
-  /* J'initialise les marges et padding de base à 0 */
+/* #region 1. RESET & VARIABLES */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
+  color: black;
 }
-
-/*
-Idée tirée sur le bout de code fourni
-Conception d'un design system.
-Définition des couleurs selon les spécifications techniques
-Les couleurs de la charte sont le bleu (#0065FC), le bleu clair (#DEEBFF) et le gris pour le
-fond (#F2F2F2). */
-/* pseudo class root */
 
 :root {
   --main-color: #0065fc;
@@ -26,199 +19,149 @@ fond (#F2F2F2). */
   --font-black: black;
 }
 
-/* Je retire ici le comportement visuel de tous les liens du document */
-/* Je préciserai le comportement des liens à chaque bloc */
+body {
+  color: var(--font-black);
+  background-color: #ffffff;
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+}
+/* #endregion */
+/* #region 2. LAYOUT GLOBAL */
 
-/* *******************************************************************************conteneurs globaux ********************************************************** */
-
-/* Je ne touche pas à la balise body */
-/* body {
-   
-
-} */
-
+/* Conteneur général */
 .enveloppe-principale {
   overflow-x: hidden;
   width: 100%;
   max-width: 1440px;
-  box-sizing: border-box;
-  /* Ici, je créé le gap de 30px entre header et body de la maquette */
   display: flex;
   flex-direction: column;
   gap: 30px;
-  /* padding: 0px 50px; */
   margin: 0 auto;
 }
 
-/* Cette balise correspond au Body de la moquette */
+/* Contenu principal de la page */
 .corps-maquette {
-  /* on impose un espacement entre chaque bloc de 35px */
   display: flex;
   flex-direction: column;
   row-gap: 35px;
-  /* padding droite et gauche de 50px */
   padding: 0 50px;
-  /* Cela vous nous permettre de prendre en cpte bordure et remplissage de le dimenssionnement des blocs */
-  /* Ce sera plus intuitif */
-  box-sizing: border-box;
   width: 100%;
 }
 
-/* J'impose le même découpage à main pour être en accord avec la maquette
-La balise main est purement informative ici */
 main {
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 35px;
-  padding: 0px;
 }
 
-/****************************************************************************Etape 3: Integration du header **********************************************************/
-/* Ici, je précise le CSS du header pour que la partie nav et le logo se dispose bien à gauche et à droite du containeur principal */
+.hebergements-and-populaires {
+  display: flex;
+  gap: 2.5rem;
+}
+/* #endregion */
+/* #region 3. HEADER */
+
 header {
   display: flex;
   justify-content: space-between;
-  /* les boutons sont ajustés sur le haut du header dans la maquette */
-  align-items: start;
-  /* la hauteure est fixe */
+  align-items: flex-start;
   height: 79px;
-
-  width: 100%;
-  box-sizing: border-box;
 }
-/* Note pour la partie responsive */
-/* Pour le passage à la partie mobile, un alignement au centre, le passage en colonne et la barre bleue sera alors bottom et non top */
-
-/* Ici, je précise les proprietes du logo en px */
-/* Les dimensions du logo sont indépendantes de la résolution de l'écran */
 header img {
   padding: 30px;
   height: 19px;
   width: 61.1px;
+  box-sizing: content-box;
 }
-
 nav {
   display: flex;
-  /* justify-content: space-between; */
-  align-items: start;
-  /* je précise 25px de padding gauche et droite */
-  padding: 0px 25px 0px;
-  /* la hauteur de 35px semble pouvoir s'adapter sur figma, je traduis les 35px en rem */
+  align-items: flex-start;
+  padding: 0 25px;
   height: 2.188rem;
-  /* la largeur est fixée sur figma */
-  width: 328px;
-  /* Je reprends ici le gap de 68px indiqué sur figma */
-  row-gap: 68px;
 }
-
 nav a {
-  height: 100%;
   display: flex;
   align-items: center;
   margin: 0 30px;
   font-size: 1rem;
+  height: 100%;
+  border-top: 2px solid transparent;
 }
-
 nav a:hover {
   color: var(--main-color);
-  border-top: var(--main-color) solid 2px;
+  border-top: var(--main-color);
 }
-
-/************************************************************** Définition de fonts que nous retrouverons dans plusieurs blocs ******************************************/
-
-section h1 {
+/* #endregion */
+/* #region 4. SECTION : FILTERS + SEARCH */
+.filtre h1 {
   font-size: 1.375rem;
   font-weight: bold;
 }
 
-/**************************************************************** Etape 4: Ajout du formulaire et de la section filtre *************************************************/
-
 .filtre {
-  width: 100%;
-
   display: flex;
   flex-direction: column;
-  /* on impose un espacement entre chaque bloc de 35px */
   row-gap: 35px;
-  box-sizing: border-box;
 }
 
-form {
+.filtre form {
   display: flex;
+  align-items: center;
 }
 
-form div {
+.zone-icone-localisation {
   width: 50px;
   height: 49px;
   background-color: var(--main-bg-color);
   border: 1px solid var(--main-bg-color);
   border-radius: 15px 0px 0px 15px;
-  /* J'aligne l'icone de géolocalisation au centre */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* le border-box me permet d'aligner le bas de mes trois rectangles */
-  box-sizing: border-box;
 }
 
 .fa-location-dot {
   color: var(--font-black);
 }
 
-form input {
-  /* je déduis les 195px par soustraction 377-50-132=195px */
-  /* color:black; */
+.filtre form input[type='search'] {
   width: 195px;
   height: 49px;
-  /* Je pense qu'on peut faire les trois lignes ci-dessous en une mais je ne sais pas faire */
   border: 1px solid var(--main-bg-color);
-  /* J'élimine ici une petite sur-épaisseur à proximité du bouton Rechercher */
   border-right: 0px;
-  /* J'élimine ici une petite sur-épaisseur à gauche même si imperceptible */
   border-left: 0px;
-
   text-align: center;
-  /* "Marseille,France" et "Rechercher" sont en bold  */
   font-weight: bold;
 }
 
-/* Pour que Marseille, France apparaisse en noir */
 form input::placeholder {
   color: black;
 }
 
 .bouton-soumission {
+  width: 132px;
+  height: 49px;
   background-color: var(--main-color);
   color: #ffffff;
   border-radius: 0px 15px 15px 0px;
-  width: 132px;
   border: 1px solid var(--main-color);
+  font-weight: bold;
+  text-align: center;
 }
 
-/* On cache la loupe */
-.icone-loupe {
+.filtre form .icone-loupe {
   display: none;
 }
-
-/**************************************************************** Etape 5: Ajout du filtre *************************************************/
 
 .filtre-categorie {
   display: flex;
   align-items: center;
-  /* height: 3.125rem; */
   width: 47.375rem;
-  /* on aurait aussi pu mettre un padding-right de 15px au titre filtre */
   column-gap: 15px;
-  /* box-sizing: border-box; */
 }
 
 .filtre-categorie-titres {
-  /* height: 100%; */
   display: flex;
   align-items: center;
-  /* je mets ici les 18 px en rem */
   font-size: 1.125rem;
   font-weight: bold;
 }
@@ -228,21 +171,15 @@ form input::placeholder {
   height: 50px;
   width: 689px;
   justify-content: space-evenly;
-  align-items: start;
+  align-items: center;
   column-gap: 15px;
 }
-
-/* on met les icones en bleu ici */
 
 .fa-fire,
 .fa-heart,
 .fa-money-bill-wave,
 .fa-person,
-/* j'ajoute le petit graphe en bleu */
-.fa-chart-line {
-  color: var(--main-color);
-}
-
+.fa-chart-line,
 .icone-filtre {
   color: var(--main-color);
 }
@@ -252,10 +189,10 @@ form input::placeholder {
 .filtre-bouton-3,
 .filtre-bouton-4 {
   display: flex;
-  background-color: white;
-  height: 50px;
   align-items: center;
   justify-content: space-evenly;
+  height: 50px;
+  background-color: white;
   border: 2px solid var(--main-bg-color);
   border-radius: 25px;
   font-weight: bold;
@@ -263,19 +200,15 @@ form input::placeholder {
 }
 
 .filtre-bouton-1 {
-  /* width: 10.813rem */
   width: 27%;
 }
 .filtre-bouton-2 {
-  /* width: 8.375rem */
   width: 21%;
 }
 .filtre-bouton-3 {
-  /* width: 10.625rem */
   width: 27%;
 }
 .filtre-bouton-4 {
-  /* width: 10.438rem */
   width: 26%;
 }
 
@@ -285,8 +218,6 @@ form input::placeholder {
 .filtre-bouton-4:hover {
   background-color: var(--filter-bg-color);
 }
-
-/* ************************************************************Ajout de l'Infobar******************************************* */
 
 .Infobar {
   display: flex;
@@ -300,16 +231,11 @@ form input::placeholder {
   height: 24px;
   border-radius: 12px;
   border: 2px solid var(--main-bg-color);
-  /* Ici, je force la margin à 0, sans cela, mon icône dépasse du cadre */
-  /* Je centre l'icone sur les deux axes */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Je décalé ici le logo info pour l'avoir dans le centre du cercle */
-/* Et je le mets en bleu */
-/* la classe fa-info aurait pu être ajouté plus haut pour la couleur */
 .fa-info {
   color: var(--main-color);
 }
@@ -317,90 +243,27 @@ form input::placeholder {
 .commentaire {
   font-size: 1rem;
 }
+/* #endregion */
+/* #region 5. SECTION : ACCOMODATIONS */
 
-/************************************************************ Etape 6: Création de la carte hébergement et des conteneurs associés ******************************/
-
-/********************************************************************** Creation des conteneurs************************************************************* */
-
-/****** Hebergements And Populaires ***********/
-
-.hebergements-and-populaires {
-  display: flex;
-  /* Je prépare ici le comportement responsive entre desktop(row) et tablette (column) */
-  flex-direction: row;
-  /* ici, je fais un essai, je ne vois pas de différence significative entre un gap en px ou en rem */
-  gap: 2.5rem;
-}
-
-/****** Hebergements ***********/
 .hebergements {
   display: flex;
   flex-direction: column;
   width: 65%;
-  /* Ici je fixe une largeur min aux blocs hébergements et populaires pour avoir un rendu acceptable entre 1025px et 1125px de résolution */
   min-width: 595px;
   background-color: var(--main-bg-color);
   border-radius: 15px;
   padding: 30px;
   gap: 30px;
-  /* sinon le gap fait partie du calcul de bloc entier */
-  box-sizing: border-box;
 }
-
-/****** Populaires ***********/
-.populaires {
-  display: flex;
-  flex-direction: column;
-  width: 32%;
-  /* Ici je fixe une largeur min aux blocs hébergements et populaires pour avoir un rendu acceptable entre 1025px et 1125px de résolution */
-
-  min-width: 241px;
-  background-color: var(--main-bg-color);
-  border-radius: 15px;
-  padding: 30px;
-  gap: 30px;
-  /* sinon le gap fait partie du calcul de bloc entier */
-  box-sizing: border-box;
-}
-
-/*********************************************************************** conteneurs des titres de chaque bloc **************************/
-
-.populaires-title {
-  height: 26px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .hebergements-activités-title {
   height: 1.625rem;
   width: 100%;
 }
 
-/**************************************************************** Quelques points spécifiques de "police et caractère" à ajuster ici ************************************/
-
-.euro {
-  /* 600 = semi-bold */
-  font-weight: 600;
-}
-
-.etoile-grise {
-  color: var(--main-bg-color);
-}
-
-/* ici, je force les liens en noir car le href a modifié les couleurs dans mes cartes */
-/* Pour une meilleur lecture, on pourrait le mettre en haut */
-a {
-  color: black;
-}
-
-/********************************************************************** creation de la carte hébergement ******************************************************/
-
 .conteneur-cartes-hebergement {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-gap: 4% 2%; */
   grid-gap: 1.875rem;
 }
 
@@ -415,11 +278,6 @@ a {
   display: flex;
   gap: 4px;
   padding-bottom: 15px;
-  box-sizing: border-box;
-  /* cursor: pointer; */
-  /* Repris du bout de code fourni*/
-  /* J'ai l'impression que c'est plutôt un box shadow qu'un drop shadow qu'il faudrait */
-  /* filter: drop-shadow(10px 3px 15px rgba(0, 0, 0, 0.25)); */
   box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.25);
 }
 
@@ -427,16 +285,12 @@ a {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   border: 5px solid white;
-  box-sizing: border-box;
-  /* hauteur fixe */
   height: 124px;
   width: 100%;
   object-fit: cover;
 }
 .carte-hebergement a {
   height: 100%;
-  /* En imposant une taille max ici, on impose une taille max à tous ses enfants carte-hebergement-text-conteneur */
-  /* Sinon, j'ai une ligne en trop sur l'une des cartes et le système n'est plus aligné */
   max-height: 195px;
 }
 
@@ -446,17 +300,14 @@ a {
   padding: 0px 15px;
   width: 100%;
   height: 35%;
-  /* C'est 35% de la taille des liens  */
   justify-content: space-between;
-  box-sizing: border-box;
 }
 
 .carte-hebergement-text {
-  /* font size 14px */
   font-size: 0.875rem;
 }
 
-.carte-hebergement-text h1 {
+.carte-hebergement-text h3 {
   font-weight: bold;
   font-size: 1rem;
 }
@@ -465,15 +316,39 @@ a {
   display: flex;
   flex-direction: row;
 }
-/************************************************************************* bouton afficher plus *****************************************************/
-
-/* J'ajuste ici le bouton afficher plus */
 .hebergements h2 {
   font-size: 1.125rem;
-  /* margin-top: 30px; */
+}
+/* #endregion */
+/* #region 6. SECTION : POPULAR */
+
+.populaires {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  min-width: 241px;
+  background-color: var(--main-bg-color);
+  border-radius: 15px;
+  padding: 30px;
+  gap: 30px;
 }
 
-/* ***********************************************************************création de la carte populaire *****************************************************/
+.populaires-title {
+  height: 26px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.euro {
+  font-weight: 600;
+}
+
+.etoile-grise {
+  color: var(--main-bg-color);
+}
+
 .conteneur-cartes-populaires {
   display: flex;
   flex-direction: column;
@@ -489,8 +364,6 @@ a {
   border-radius: 20px;
   border: 5px white;
   width: 100%;
-  /* J'ai l'impression que c'est plutôt un box shadow qu'un drop shadow qu'il faudrait */
-  /* filter: drop-shadow(10px 3px 15px rgba(0, 0, 0, 0.25)); */
   box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.25);
 }
 
@@ -498,7 +371,6 @@ a {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   border: 5px solid white;
-  box-sizing: border-box;
   min-height: 9rem;
   width: 33%;
   object-fit: cover;
@@ -510,35 +382,29 @@ a {
   gap: 24px;
   padding: 10px 0px 5px 15px;
   width: 100%;
-  box-sizing: border-box;
   justify-content: space-between;
 }
 
 .carte-populaires-text {
   line-height: 1.5rem;
-  /* font size 14px */
   font-size: 0.875rem;
   height: 100%;
   width: 100%;
 }
 
-.carte-populaires-text h1 {
+.carte-populaires-text h3 {
   font-weight: bold;
   font-size: 1rem;
 }
-
-/******************************************************** Etape 7: Creation de la card pour activité à Marseille *************************************************/
-
+/* #endregion */
+/* #region 7. SECTION : ACTIVITIES */
 .conteneur-Activités {
   width: 100%;
   padding: 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  box-sizing: border-box;
 }
-
-/* le conteneur du titre sera le même que celui des hébergements */
 
 .conteneur-cartes-activites {
   width: 100%;
@@ -554,7 +420,6 @@ a {
 .carte-activités {
   display: flex;
   flex-direction: column;
-  /* filter: drop-shadow(10px 3px 15px rgba(0, 0, 0, 0.25)); */
   box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   border: 1px solid var(--filter-bg-color);
@@ -570,16 +435,13 @@ a {
 }
 
 .carte-activités-text {
-  /* Je choisis cette configuration pour que les cartes et images restent à la même taille */
-  /* lorsque le texte descrptif passe sur deux lignes */
   padding: 8% 19px 0px 19px;
   display: flex;
   font-weight: bold;
   font-size: 1rem;
 }
-
-/* <!-------------------------------------------- Etape 9: Intégration du footer ----------------------------------------------------------------> */
-
+/* #endregion */
+/* #region 8. FOOTER */
 footer {
   background-color: var(--main-bg-color);
   width: 100%;
@@ -601,31 +463,18 @@ footer div {
   height: 100%;
 }
 
-/* Je retire les puces de la liste entre précisant le style de ul utilisé dans le footer */
 footer ul {
   list-style-type: none;
 }
-
-/* <!-------------------------------------------- Etape 10: version responsive ----------------------------------------------------------------> */
-
-/* Le code ci-dessous correspond à la version responsive uniquement */
-
-/****** Media queries ***********/
-/* Medium devices (tablets, less/equal than 1024px) */
+/* #endregion */
+/* #region 9. MEDIA QUERIES */
 @media (max-width: 1024px) {
-  /* Ici, entre 810px et 786px, il est plus élégant de fixer la réduction des conteneurs */
-  /* .corps-maquette{  
-    
-    min-width: 804px;
-}  */
-
   .filtre-categorie {
     flex-direction: column;
     align-items: start;
     gap: 20px;
     height: 5.688rem;
     width: 100%;
-    /* Je préfère fixer une largeur min pour la transition de tablette à phone */
     min-width: 768px;
   }
 
@@ -661,8 +510,6 @@ footer ul {
     width: 100%;
   }
 
-  /* réglages pour éviter les soucis d'affichage vers 800px et moins */
-
   .carte-populaires {
     width: 100%;
     min-width: 164px;
@@ -681,13 +528,10 @@ footer ul {
     height: 89%;
   }
   .carte-activités img {
-    /* Ici, je fixe la taille de l'image pour que ce soit la carte qui s'adapte aux changements de ligne */
     height: 200px;
   }
 }
 
-/* Small devices (phones, less than 768px) */
-/* pour exclure l'ipad mini */
 @media (max-width: 767.9px) {
   .corps-maquette {
     min-width: unset;
@@ -708,7 +552,6 @@ footer ul {
   nav {
     width: 100%;
     padding: 0px;
-    /* align-items: ; */
   }
 
   nav a {
@@ -723,7 +566,6 @@ footer ul {
     border-bottom: var(--main-color) solid 2px;
   }
 
-  /* On cache le mot recherche */
   .bouton-soumission {
     display: none;
   }
@@ -732,7 +574,6 @@ footer ul {
     width: 100%;
   }
 
-  /* On affiche la loupe */
   .icone-loupe {
     display: flex;
     background-color: var(--main-color);
@@ -741,11 +582,6 @@ footer ul {
     width: 50px;
     height: 49px;
     border: 1px solid var(--main-color);
-    /* Ici, on décale la loupe à gauche pour les traits gris touchent l'icône */
-    /* Première solution: à 320 px, l'icone est légèrement écrasé en largeur */
-    /* position: relative;
-        right: 9px; */
-    /* Deuxième solution plus simple: */
     margin-left: -11px;
   }
 
@@ -813,10 +649,10 @@ footer ul {
   footer {
     flex-direction: column;
     padding: 30px;
-    box-sizing: border-box;
   }
 
   footer div {
     width: 100%;
   }
 }
+/* #endregion */

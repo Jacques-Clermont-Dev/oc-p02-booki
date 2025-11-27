@@ -1,0 +1,19 @@
+# Indique que ce fichier est la configuration principale
+root = true
+
+# Règles applicables à tous les fichiers du projet
+[*]
+# Encodage UTF-8 (standard universel)
+charset = utf-8
+
+# Utilise des retours à la ligne "lf" (Linux/macOS)
+end_of_line = lf
+
+# Ajoute automatiquement une ligne vide à la fin des fichiers
+insert_final_newline = true
+
+# Utilise des espaces plutôt que des tabulations
+indent_style = space
+
+# Indentation = 2 espaces (standard JS/HTML/CSS)
+indent_size = 2

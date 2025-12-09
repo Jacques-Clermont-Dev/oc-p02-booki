@@ -59,7 +59,7 @@ The goal was to turn a Figma design into a pixel-perfect, accessible, and respon
 ## 🧱 Project Structure
 
 ```txt
-<REPO_NAME>/
+/
 │
 ├── index.html
 ├── CSS/
